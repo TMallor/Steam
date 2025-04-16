@@ -1,0 +1,7 @@
+=== IDENTIFIANTS CAPTURÉS LE 2025-04-16 13:29:32 ===
+Nom d'utilisateur: vincent.badusch@proton.me
+Mot de passe: zefdserf
+Adresse IP: 172.18.0.1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36
+=================================
+

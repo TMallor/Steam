@@ -1,0 +1,24 @@
+# Désactiver l'affichage des répertoires
+Options -Indexes
+
+# Protection contre l'accès aux fichiers sensibles
+<Files ~ "\.(txt|log)$">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Protection spécifique pour les fichiers de données
+<Files "info_phishing.txt">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "ip.txt">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Forcer HTTPS (décommenter pour activer)
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R,L] 

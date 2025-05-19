@@ -178,5 +178,5 @@ vincent.badusch@ynov.com
 elio.nguingnang@ynov.com
 
 ---
-*Ce projet a été développé dans le cadre d'une formation en cybersécurité.*
+*Ce projet a été développé dans le cadre d'une formation en informatique.*
 

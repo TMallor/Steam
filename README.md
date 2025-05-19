@@ -59,7 +59,7 @@ Le projet intègre un script de surveillance (`clear_phishing_loop.sh`) qui :
 ## 📦 Installation
 1. Clonez le dépôt :
 ```bash
-git clone [https://github.com/TMallor/Steam.git]
+git clone https://github.com/TMallor/Steam.git
 ```
 
 2. Installez PHP et PHP-FPM :

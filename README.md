@@ -175,6 +175,7 @@ Le projet a été **déployé sur un VPS Hostinger** sous **Debian 12**, à l'ad
 Pour toute question ou suggestion, n'hésitez pas à nous contacter.
 tom.mallor@ynov.com
 vincent.badusch@ynov.com
+elio.nguingnang@ynov.com
 
 ---
 *Ce projet a été développé dans le cadre d'une formation en cybersécurité.*

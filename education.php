@@ -1,5 +1,4 @@
 <?php
-// Si l'utilisateur a cliqué sur le bouton "En savoir plus", on active un cookie
 if(isset($_GET['acknowledge'])) {
     setcookie("phishing_awareness", "true", time() + (86400 * 30), "/"); // 30 jours
     header("Location: https://store.steampowered.com/");

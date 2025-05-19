@@ -1,12 +1,8 @@
 <?php
-// Page pour générer des QR codes pour le projet de sensibilisation
-// Cette page est protégée par mot de passe pour éviter une utilisation non autorisée
 
-// Paramètres de connexion
 $username = "admin";
 $password = "securitydemo2023"; // À changer pour un mot de passe plus fort en production
 
-// Vérifier si l'utilisateur est connecté
 session_start();
 $loggedIn = false;
 
@@ -21,11 +17,9 @@ if (isset($_POST['login'])) {
     $loggedIn = true;
 }
 
-// Paramètres par défaut pour les QR codes
 $defaultUrl = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
 $qrCodeGenerated = false;
 
-// Générer un QR code si demandé
 if ($loggedIn && isset($_POST['generate'])) {
     $url = !empty($_POST['custom_url']) ? $_POST['custom_url'] : $defaultUrl;
     $size = isset($_POST['size']) ? intval($_POST['size']) : 300;

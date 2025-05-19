@@ -1,5 +1,4 @@
 <?php
-// Redirection après un court délai vers la page éducative
 header("refresh:5;url=education.php");
 ?>
 <!DOCTYPE html>

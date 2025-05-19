@@ -1,0 +1,19 @@
+# Fichiers de logs et données
+*.log
+info_phishing.txt
+ip.txt
+
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Fichiers d'IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.swp 
